@@ -1,50 +1,257 @@
-# NALS - NeuroAdaptive Learning System
-**Cognitive Infrastructure Layer for Learning Systems**
+## 🧠 NALS — NeuroAdaptive Learning System
+
+### Cognitive Infrastructure Layer for Next-Generation Learning Systems
+
+---
 
 ## 🏆 The Problem
-Traditional EdTech platforms treat all students the same. They use static spaced repetition (like Anki) that doesn't account for *how* a specific user learns, or *how* concepts are connected. When a student forgets a foundational concept, the entire learning structure collapses, and the system doesn't know why.
 
-## 🚀 The Solution: NALS
-NALS is not just a learning app; it is a **Cognitive Prediction System**. It builds a mathematical model of your brain's memory decay and intervenes before failure happens.
+Traditional EdTech platforms treat all learners the same.
 
-### 🎯 Target Users & Business Value
-- **Students & Professionals (B2C):** Medical, Law, Engineering (high-volume, high-stakes memorization).
-- **EdTech Platforms (B2B):** Licensing this cognitive engine to existing LMS platforms (Canvas, Blackboard) to reduce dropout rates, optimize learning time, and increase student success.
+Most systems rely on **static spaced repetition** (e.g., Anki), which assumes:
 
-### Key Innovations:
-1. **Personalized Cognitive Decay (λ):** We modified the Ebbinghaus Forgetting Curve. Instead of a static decay rate, our AI calculates a personalized `λ` (lambda) for every user, adjusting in real-time based on quiz performance.
-2. **Cognitive Dependency Mapping:** Knowledge isn't isolated. If you forget "DBMS Normalization", you will struggle with "Indexing". Our AI maps these dependencies and calculates a **Risk Score** for cascading knowledge failure.
-3. **Explainable AI ("Why this revision?"):** We don't just tell students what to study. We show them the exact math and AI confidence score behind the recommendation, building trust in the system.
-4. **Prediction vs Reality Engine:** The system continuously validates its own predictions against actual quiz scores, achieving a 91.4% model accuracy.
+* Uniform memory decay
+* Independent topics
+* Fixed revision intervals
+
+### ⚠️ Reality is Different:
+
+* Memory decay varies per individual
+* Concepts are **interdependent**
+* Forgetting a foundational topic causes **cascading failure**
+
+👉 When a student forgets *DBMS Normalization*, it impacts *Indexing, Query Optimization, and Design*
+
+**Current systems do not detect or prevent this.**
+
+---
+
+## 🚀 The Solution — NALS
+
+NALS is not just a learning platform —
+it is a **Cognitive Prediction System**.
+
+It builds a dynamic model of:
+
+* Memory decay
+* Concept dependencies
+* Learning behavior
+
+👉 And **intervenes before failure occurs**
+
+---
+
+## 🎯 Target Users & Business Value
+
+### 👨‍🎓 B2C — Students & Professionals
+
+* Engineering, Medical, Law
+* High-volume, high-stakes learning environments
+
+### 🏢 B2B — EdTech Platforms
+
+* LMS platforms (Canvas, Blackboard)
+* Improve retention & reduce dropout rates
+* Optimize learning efficiency at scale
+
+---
+
+## 🧠 Core Innovations
+
+### 🔹 1. Personalized Cognitive Decay (λ)
+
+We extend the **Ebbinghaus Forgetting Curve** by introducing:
+
+👉 A **dynamic λ (lambda)** per user
+
+* Adjusts based on quiz performance
+* Adapts to learning patterns
+* Enables personalized retention modeling
+
+---
+
+### 🔹 2. Cognitive Dependency Mapping
+
+Knowledge is not isolated.
+
+NALS builds a **graph-based dependency model**:
+
+* Nodes → Topics
+* Edges → Concept relationships
+
+👉 If a core topic weakens:
+
+* System detects **cascading risk**
+* Assigns **impact-based priority**
+
+---
+
+### 🔹 3. Explainable AI (XAI Layer)
+
+Unlike black-box systems:
+
+✔ Shows *why* a revision is recommended
+✔ Displays confidence scores
+✔ Builds user trust
+
+---
+
+### 🔹 4. Prediction vs Reality Engine
+
+* Continuously compares predicted vs actual performance
+* Improves system reliability over time
+
+📊 Current prototype simulation:
+
+* Model alignment observed at ~91% consistency
+
+---
 
 ## 🏗 System Architecture
-NALS is built with an enterprise-grade, modular architecture designed for scale:
 
-```text
-Frontend (React 19, Tailwind v4, Recharts, XYFlow)
-      ↓
-API Gateway (Node.js / Express)
-      ↓
-AI Engine Service (Decay Modeling & Dependency Graph)
-      ↓
-Data Layer (User Profiles + Learning Logs)
+```
+                        ┌────────────────────────┐
+                        │        USER            │
+                        │  (Student / Learner)   │
+                        └──────────┬─────────────┘
+                                   ↓
+                    ┌────────────────────────────┐
+                    │        FRONTEND UI         │
+                    │ React + Vite + Tailwind    │
+                    │ - Dashboard                │
+                    │ - Analytics Page           │
+                    │ - Cognitive Map            │
+                    └──────────┬─────────────────┘
+                               ↓
+                    ┌────────────────────────────┐
+                    │        API LAYER           │
+                    │ Node.js / Serverless API   │
+                    │ - /api/cognitive/map       │
+                    │ - /api/retention           │
+                    └──────────┬─────────────────┘
+                               ↓
+        ┌──────────────────────────────────────────────┐
+        │        COGNITIVE ENGINE (CORE LOGIC)         │
+        │                                              │
+        │ • Risk Prediction Model                      │
+        │ • Retention Decay Simulation                 │
+        │ • Dependency Analysis Engine                 │
+        │ • Feature Weight Computation                 │
+        └──────────┬───────────────────────────────────┘
+                   ↓
+        ┌──────────────────────────────────────────────┐
+        │      DATA PROCESSING & RESPONSE LAYER        │
+        │                                              │
+        │ • Weak Topics Detection                      │
+        │ • Impacted Topics Generation                 │
+        │ • Insight Generation                         │
+        └──────────┬───────────────────────────────────┘
+                   ↓
+        ┌──────────────────────────────────────────────┐
+        │   VISUALIZATION & ANALYTICS LAYER            │
+        │                                              │
+        │ • Cognitive Map (Graph)                      │
+        │ • ML Telemetry (Confidence, Time)            │
+        │ • Risk Dashboard                             │
+        └──────────────────────────────────────────────┘
+
+```
+The architecture separates intelligence (cognitive engine) from visualization, enabling scalability for real AI model integration.
+
+---
+
+## 🧠 Algorithm Design
+
+Current Model:
+
+```
+Retention = e^(-λ * t / p)
 ```
 
-## 🧠 Algorithm Design & Roadmap
-We currently use a rule-enhanced modified retention formula:
-`Retention = e^(-λ * t / p)`
+Where:
 
-**The Future (Reinforcement Learning):** 
-While currently rule-based, the NALS engine is designed to evolve into a reinforcement learning pipeline. **Each interaction improves the decay model** using continuous user feedback loops.
+* λ → Personalized decay rate
+* t → Time since last revision
+* p → Performance factor
+
+---
+
+### 🔮 Future Roadmap
+
+The system is designed to evolve into:
+
+👉 **Reinforcement Learning-based Adaptive Engine**
+
+* Continuous feedback loop
+* Self-optimizing decay predictions
+* Real-time learning adaptation
+
+---
 
 ## 💻 Tech Stack
-- **Frontend:** React 19, Tailwind CSS v4, Lucide Icons, Recharts (Data Viz), React Flow (Cognitive Graph)
-- **Backend:** Node.js, Express
-- **Architecture:** Client-Server SPA with isolated AI Service Layer
+
+### Frontend
+
+* React 19
+* Tailwind CSS v4
+* Recharts (Analytics)
+* React Flow / XYFlow (Graph Visualization)
+
+### Backend
+
+* Node.js
+* Express
+
+### Architecture
+
+* Client-Server SPA
+* Modular AI Service Layer
+
+---
 
 ## 🏃‍♂️ Running Locally
+
 ```bash
 npm install
 npm run dev
 ```
-Access the app at `http://localhost:3000`. Use any email/password for the demo login.
+
+Open:
+👉 http://localhost:3000
+
+Use any email/password for demo login.
+
+---
+
+## 🏁 Key Insight
+
+NALS shifts learning from:
+
+📚 Content Delivery
+➡️ 🧠 Cognitive Intelligence
+
+---
+
+---
+
+## 👥 Team — Phantom!!
+
+### 🚀 Team Members
+
+* **Pavithra P** 
+* **Sharmila V** 
+* **Priyadharshini R** 
+* **Nithyasree M** 
+
+---
+
+## 🤝 Collaboration
+
+This project was built collaboratively with contributions across:
+
+* System Design
+* Frontend Development
+* Backend Logic
+* AI Simulation & Analysis
+
+---
