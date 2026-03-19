@@ -1,0 +1,5 @@
+{
+  "name": "NeuroAdaptive Learning System (NALS)",
+  "description": "A cognitive intelligence system that models human memory decay and dynamically adapts learning schedules using predictive intelligence.",
+  "requestFramePermissions": []
+}
