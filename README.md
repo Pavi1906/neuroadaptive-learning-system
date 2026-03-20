@@ -41,6 +41,18 @@ It builds a dynamic model of:
 
 ---
 
+Demo Link:
+
+https://nals-eight.vercel.app
+
+---
+
+Demo Video Link:
+
+https://drive.google.com/file/d/19jThttkx7_QnyQ_lQDtpIcsXNwVWUhBX/view?usp=share_link
+
+---
+
 ## 🎯 Target Users & Business Value
 
 ### 👨‍🎓 B2C — Students & Professionals
